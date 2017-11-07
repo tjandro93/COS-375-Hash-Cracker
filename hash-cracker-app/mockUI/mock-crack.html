@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<! Mockup of the main password cracking page>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MOCKUP Hash Cracker</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="m-2">
+  <div class="navbar bg-primary rounded p-3">
+    <a class="navbar-brand text-light">Password Hash Cracker</a>
+  </div>
+
+  <div class="m-4">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-4">
+        <p class="">Enter an LM Hash to be guessed</p>
+        </div>
+
+        <div class="col">
+
+          <form>
+
+            <div class="form-group">
+                <label for="hashIn" class="row">Password Hash</label>
+              <div class="row">
+                <input type="text" value="a7155366c0745858fa6b5cd090872c41" class="form-control" id="hashIn"/>
+                <input type="button" class="btn btn-primary m-1" value="Submit">
+              </div>
+            </div>
+
+            <div class="form-group">
+                <label for="passOut" class="row">Plaintext Password</label>
+                <input class="form-control-plaintext row" placeholder="secretphrase" id="passOut" readonly/>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

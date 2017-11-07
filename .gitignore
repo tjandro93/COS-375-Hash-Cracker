@@ -3,3 +3,27 @@ node_modules/
 npm-debug.log
 .idea/
 e2e/
+/.metadata/
+
+
+# Eclipse
+.classpath
+.project
+.settings/
+ 
+# Intellij
+.idea/
+*.iml
+*.iws
+ 
+# Mac
+.DS_Store
+ 
+# Maven
+log/
+target/
+
+.recommenders/
+*/bin/*
+
+gs-rest*
