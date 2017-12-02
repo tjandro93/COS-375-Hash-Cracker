@@ -1,65 +1,81 @@
 package edu.usm.cos375.resthash.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.usm.cos375.resthash.datasource.StaticHashSource;
-import edu.usm.cos375.resthash.model.Hash;
+import edu.usm.cos375.resthash.datasource.SecretRepository;
+import edu.usm.cos375.resthash.exception.LmPlaintextException;
+import edu.usm.cos375.resthash.model.LmHash;
 import edu.usm.cos375.resthash.model.Secret;
 
 @Service
 public class SecretServiceImpl implements SecretService {
 
 	@Autowired
-	private StaticHashSource data;
+	private SecretRepository secretRepository;
+
+	@Autowired
+	private LMGenerator lmGenerator;
+
 
 	@Override
 	public List<Secret> getAll() {
-		return data.getSecrets();
+
+		Iterable<Secret> secrets = secretRepository.findAll();
+		if(secrets != null) {
+			for(Secret s : secrets) {
+				s.incrementTimesRequested();
+			}
+			secretRepository.save(secrets);
+		}
+		return (List<Secret>) secrets;
 	}
 
 	@Override
-	public List<Secret> getByHash(String htext) {
-		List<Secret> foundMatches = new ArrayList<Secret>();
-		for(Secret s : data.getSecrets()) {
-			for(Hash h : s.getKnownHashes()) {
-				if(h.getHashedPlaintext().equalsIgnoreCase(htext)) {
-					foundMatches.add(s);
-				}
-			}
+	public Secret getByHash(String htext) {
+		Secret secret = secretRepository.findByHashedPlaintext(htext);
+		if(secret != null) {
+			secret.incrementTimesRequested();
+			secretRepository.save(secret);
 		}
-		return foundMatches;
+		return secret;
 	}
 
 	@Override
 	public Secret getByPlaintext(String ptext) {
-		for(Secret s : data.getSecrets()) {
-			if(s.getPlaintext().equalsIgnoreCase(ptext)) {
-				return s;
-			}
+		Secret s = secretRepository.findByPlaintext(ptext);
+		if(s != null) {
+			s.incrementTimesRequested();
+			secretRepository.save(s);
 		}
-		return null;
+		return s;
 	}
 
 	@Override
 	public void delete(String ptext) {
-		Secret secret = getByPlaintext(ptext);
-		data.getSecrets().remove(secret);
+		secretRepository.deleteByPlaintext(ptext);
 	}
 
 	@Override
-	public void create(String ptext) {
-		// TODO Auto-generated method stub
-		
+	public void create(String ptext) throws LmPlaintextException {
+		Secret sec = new Secret();
+		sec.setPlaintext(ptext);
+		String hashtext;
+		hashtext = lmGenerator.findHash(ptext);
+
+		LmHash lmHash = new LmHash();
+		lmHash.setHashedPlaintext(hashtext);
+		sec.setLmHash(lmHash);
+		lmHash.getMetadata().updateInstantFound();
+		secretRepository.save(sec);
+
 	}
 
 	@Override
 	public boolean exists(String ptext) {
-		// TODO Auto-generated method stub
-		return false;
+		return secretRepository.existsByPlaintext(ptext);
 	}
 
 }

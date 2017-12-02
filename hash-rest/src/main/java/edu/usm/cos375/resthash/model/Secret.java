@@ -1,46 +1,63 @@
 package edu.usm.cos375.resthash.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /*
  * Represents a single plaintext password which may have many known hashes from different algorithms associated with it.
  */
+@Entity
 public class Secret {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="SEC_ID")
+	private Long id;
+	
 	private String plaintext;
-	private Set<Hash> knownHashes;
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn()
+	private LmHash lmHash;
 	
 	public Secret() {}
-	
-	public Secret(String plaintext) {
-		this.knownHashes = new HashSet<Hash>();
-		this.plaintext = plaintext;
+
+	public Secret(LmHash lmHash) {
+		this.lmHash = lmHash;
 	}
 	
+	public void incrementTimesRequested() {
+		lmHash.getMetadata().incrementTimesRequested();	
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getPlaintext() {
 		return plaintext;
 	}
-	
+
 	public void setPlaintext(String plaintext) {
 		this.plaintext = plaintext;
 	}
-	
-	public void addLMHash() {
-		this.knownHashes.add(new LMHash(this.plaintext));
+
+	public LmHash getLmHash() {
+		return lmHash;
 	}
-	
-	public Set<Hash> getKnownHashes() {
-		return knownHashes;
-	}
-	
-	public void setKnownHashes(Set<Hash> knownHashes) {
-		this.knownHashes = knownHashes;
-	}
-	
-	public void incrementAllTimesRequested() {
-		for(Hash h : knownHashes) {
-			h.getMetadata().incrementTimesRequested();
-		}
+
+	public void setLmHash(LmHash lmHash) {
+		this.lmHash = lmHash;
 	}
 	
 	@Override

@@ -27,3 +27,5 @@ target/
 */bin/*
 
 gs-rest*
+
+*.old*
