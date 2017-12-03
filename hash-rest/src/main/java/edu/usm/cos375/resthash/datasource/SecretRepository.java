@@ -2,6 +2,7 @@ package edu.usm.cos375.resthash.datasource;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import edu.usm.cos375.resthash.model.Secret;
@@ -11,6 +12,7 @@ public interface SecretRepository extends CrudRepository<Secret, Long>{
 	@Query("SELECT sec FROM Secret sec WHERE sec.plaintext = ?1")
 	public Secret findByPlaintext(String ptext);
 
+	@Modifying
 	@Query("DELETE FROM Secret sec WHERE plaintext = ?1")
 	public void deleteByPlaintext(String ptext);
 

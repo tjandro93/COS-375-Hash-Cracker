@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ import edu.usm.cos375.resthash.exception.RestRequestException;
 import edu.usm.cos375.resthash.model.Secret;
 import edu.usm.cos375.resthash.service.SecretService;
 
+@CrossOrigin
 @RestController
 public class HashController {
 
@@ -87,17 +89,17 @@ public class HashController {
 	 * Create a new Secret based on the supplied plaintext
 	 */
 	@RequestMapping(value="secrets/{ptext}", method=RequestMethod.POST)
-	public ResponseEntity<Void> create(@PathVariable("ptext") String ptext, UriComponentsBuilder ucBuilder) 
-			throws LmPlaintextException{
+	public ResponseEntity<Secret> create(@PathVariable("ptext") String ptext, UriComponentsBuilder ucBuilder) 
+			throws LmPlaintextException, RestRequestException{
 		if(secretService.exists(ptext)) {
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			throw new RestRequestException("The secret " + ptext + " is already present in the database ", HttpStatus.CONFLICT);
 		}
 		else {
-			secretService.create(ptext);
+			Secret secret = secretService.create(ptext);
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(ucBuilder.path("").buildAndExpand(ptext).toUri());
-			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+			return new ResponseEntity<Secret>(secret, headers, HttpStatus.CREATED);
 		}
 	}
 }

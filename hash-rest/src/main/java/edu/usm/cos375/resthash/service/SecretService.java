@@ -15,7 +15,7 @@ public interface SecretService {
 
 	public void delete(String ptext);
 
-	public void create(String ptext) throws LmPlaintextException;
+	public Secret create(String ptext) throws LmPlaintextException;
 
 	public boolean exists(String ptext);
 }

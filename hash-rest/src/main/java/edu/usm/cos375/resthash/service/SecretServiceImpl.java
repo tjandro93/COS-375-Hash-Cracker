@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.usm.cos375.resthash.datasource.SecretRepository;
 import edu.usm.cos375.resthash.exception.LmPlaintextException;
@@ -53,13 +54,15 @@ public class SecretServiceImpl implements SecretService {
 		return s;
 	}
 
+	@Transactional
 	@Override
 	public void delete(String ptext) {
 		secretRepository.deleteByPlaintext(ptext);
 	}
 
+	@Transactional
 	@Override
-	public void create(String ptext) throws LmPlaintextException {
+	public Secret create(String ptext) throws LmPlaintextException {
 		Secret sec = new Secret();
 		sec.setPlaintext(ptext);
 		String hashtext;
@@ -69,7 +72,7 @@ public class SecretServiceImpl implements SecretService {
 		lmHash.setHashedPlaintext(hashtext);
 		sec.setLmHash(lmHash);
 		lmHash.getMetadata().updateInstantFound();
-		secretRepository.save(sec);
+		return secretRepository.save(sec);
 
 	}
 

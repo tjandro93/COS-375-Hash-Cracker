@@ -46,6 +46,7 @@ public class RestHashExceptionHandler extends ResponseEntityExceptionHandler{
 				ex.getMethod() +  " is not allowed in the context", ex));                  
 	}
 	
+	
 	private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
 		return new ResponseEntity<>(apiError, apiError.getStatus());
 	}
