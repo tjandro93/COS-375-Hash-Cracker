@@ -5,7 +5,9 @@ See [hash-rest](./hash-rest) for the serverside Spring RESTful web service and [
 
 ### Current State
 
-Currently, the REST API is fully implemented on the Spring side, with backing by MySQL. On the Angular side, I have the use case covered where a user provides the passwords plaintext and requests the hash and metadata associated. It is only partially working as of now. The next step is to implement the use case where a user provides a hash value and requests the plaintext of the password which it was generated from. 
+Currently, the REST API is fully implemented on the Spring side, with backing by MySQL.
+
+On the Angular side, I have the use case covered where a user provides the passwords plaintext and requests the hash and metadata associated. I have also implemented the use case where a user provides a hash value and requests the plaintext of the password which it was generated from. Both these implementations are only partly working, but they are functional for happy paths.
 
 See [output](./output) for screen shots of the REST API, the MySQL tables backing the REST API, and the Angular front-end.
 
