@@ -3,7 +3,6 @@
 
 See [hash-rest](./hash-rest) for the serverside Spring RESTful web service and [hash-cracker-app](./hash-cracker-app) for the clientside Angular web application.
 
-=======
 ### Current State
 
 Currently, the REST API is fully implemented on the Spring side, with backing by MySQL.
