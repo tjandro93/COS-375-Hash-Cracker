@@ -7,8 +7,9 @@ import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /*
- * The error handling was done following this tutorial
+ * The error handling was done following these tutorials
  * 		https://www.toptal.com/java/spring-boot-rest-api-error-handling
+ * 		http://www.baeldung.com/exception-handling-for-rest-with-spring
  */
 
 public class ApiError {
