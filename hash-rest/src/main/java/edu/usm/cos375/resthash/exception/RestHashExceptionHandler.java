@@ -15,7 +15,6 @@ import edu.usm.cos375.resthash.model.ApiError;
 /*
  * This exception handling was done following along with
  * 		https://www.toptal.com/java/spring-boot-rest-api-error-handling
- * 		http://www.baeldung.com/exception-handling-for-rest-with-spring
  */
 
 @ControllerAdvice

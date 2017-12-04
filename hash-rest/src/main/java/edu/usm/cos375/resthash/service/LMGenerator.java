@@ -25,7 +25,7 @@ import edu.usm.cos375.resthash.exception.LmPlaintextException;
  *		https://blog.skullsecurity.org/2008/lanman-and-ntlm-not-as-complex-as-you-think
  * 		https://www.mkyong.com/java/jce-encryption-data-encryption-standard-des-tutorial/
  * and a bunch of reading through the JCE documentation
- * 		https://docs.oracle.com/javase/7/docs/technotes/guides/security/crypto/CryptoSpec.html
+ * 		https://docs.oracle.com/javase/7/docs/technotes/guides/security/crypto/CryptoSpec.html#SecretKeyFactory
  */
 
 @Service
