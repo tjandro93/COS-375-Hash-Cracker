@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+/*
+ * Entity to represent an LM Hash, persisted with MySQL
+ */
+
 @Entity
 public class LmHash {
 	

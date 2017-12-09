@@ -4,6 +4,10 @@ import {Secret} from "../model/secret.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SecretRepository} from "../model/secret.repository";
 
+/*
+Component to be used to crack a hash and display the associated password
+ */
+
 @Component({
   selector: 'hash-crack',
   templateUrl: 'hash-crack.component.html',

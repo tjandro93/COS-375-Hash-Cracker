@@ -6,6 +6,10 @@ import {Secret} from "./secret.model";
 import {LmHash} from "./lm-hash.model";
 import {Metadata} from "./metadata.model";
 
+/*
+Repository service to access Secrets returned by RestDatasource
+ */
+
 @Injectable()
 export class SecretRepository{
 

@@ -10,8 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /*
- * Represents a single plaintext password which may have many known hashes from different algorithms associated with it.
+ * Represents a single plaintext password which will have an LM Hash associated with it
  */
+
 @Entity
 public class Secret {
 	
