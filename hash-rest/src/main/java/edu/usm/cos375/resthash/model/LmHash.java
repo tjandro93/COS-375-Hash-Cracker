@@ -9,10 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import edu.usm.cos375.resthash.service.LMGenerator;
-
 @Entity
 public class LmHash {
 	

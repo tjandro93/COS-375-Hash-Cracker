@@ -4,6 +4,10 @@ import org.springframework.http.HttpStatus;
 
 public class RestRequestException extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -979827629487092059L;
 	private String message;
 	private HttpStatus status;
 	

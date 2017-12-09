@@ -41,7 +41,7 @@ public class LMCracker {
 	private static final String FILE_INPUT_PATH = "src/ophcrack-3.7.0-bin/x64/tempFiles/in.txt";
 	
 	private static final String[] PROCESS_CALL = {"cmd", "/c", "ophcrack_nogui", "-g", "-d", TABLE_PATH, "-t", TABLE_PATH, 
-													"-f", INPUT_PATH, "-o", OUTPUT_PATH};
+													"-f", INPUT_PATH, "-o", OUTPUT_PATH, ">", "log.txt"};
 	
 	
 	public String crackHash(String hashText) throws HashCrackException {
@@ -102,7 +102,7 @@ public class LMCracker {
 			try {
 				reader.close();
 			} catch (IOException e1) {
-				// reader already closed so do nothin
+				// reader already closed so do nothing
 			}
 			throw new HashCrackException(hashText, "Could not read from " + FILE_OUTPUT_PATH);
 		}
@@ -127,6 +127,7 @@ public class LMCracker {
 		}
 		hashIn = sc.next();
 		if(!hashIn.equals(hashText)) {
+			sc.close();
 			throw new HashCrackException(hashText, "the hash from Ophcrack does not match the requested hash");
 		}
 		if(!sc.hasNext()) {
@@ -137,7 +138,7 @@ public class LMCracker {
 			ptext2 = sc.next();
 		}
 		
-
+		sc.close();
 		String finalText = ptext1 + ptext2;
 		if(finalText.equals("") || finalText == null) {
 			throw new HashCrackException(hashText, "The empty password was returned");

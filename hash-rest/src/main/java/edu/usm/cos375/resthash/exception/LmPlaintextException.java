@@ -1,6 +1,10 @@
 package edu.usm.cos375.resthash.exception;
 
 public class LmPlaintextException extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2640389570262328197L;
 	private String message;
 	
 	public LmPlaintextException(){

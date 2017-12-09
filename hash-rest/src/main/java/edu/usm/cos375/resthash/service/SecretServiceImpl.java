@@ -99,7 +99,6 @@ public class SecretServiceImpl implements SecretService {
 		lmHash.getMetadata().updateInstantFound();
 		lmHash.getMetadata().setSecondsToFind(endTime - startTime);
 		return secretRepository.save(sec);
-
 	}
 
 	@Override

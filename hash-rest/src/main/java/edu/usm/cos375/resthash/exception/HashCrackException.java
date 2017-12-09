@@ -1,6 +1,10 @@
 package edu.usm.cos375.resthash.exception;
 
 public class HashCrackException extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3486226379901694080L;
 	private String message;
 	
 	public HashCrackException(){

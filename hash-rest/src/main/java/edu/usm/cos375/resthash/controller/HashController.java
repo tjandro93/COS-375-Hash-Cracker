@@ -1,8 +1,6 @@
 package edu.usm.cos375.resthash.controller;
 
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,7 +16,6 @@ import edu.usm.cos375.resthash.exception.HashCrackException;
 import edu.usm.cos375.resthash.exception.LmPlaintextException;
 import edu.usm.cos375.resthash.exception.RestRequestException;
 import edu.usm.cos375.resthash.model.Secret;
-import edu.usm.cos375.resthash.service.LMCracker;
 import edu.usm.cos375.resthash.service.SecretService;
 
 @CrossOrigin
