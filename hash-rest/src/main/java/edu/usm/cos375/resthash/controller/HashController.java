@@ -18,23 +18,6 @@ import edu.usm.cos375.resthash.exception.RestRequestException;
 import edu.usm.cos375.resthash.model.Secret;
 import edu.usm.cos375.resthash.service.SecretService;
 
-
-/*
- * The RestController for the application.
- * Handles REST requests as described below
- * 
- * GET /secrets
- * 		Returns all secrets in the database
- * GET /secrets/{plaintext}
- * 		Returns the secret with given plaintext
- * GET /hashes/{hash}
- * 		Returns the secret with the given hash
- * DELETE /secrets/{plaintext}
- * 		Deletes the secret with given plaintext from the database
- * POST /secrets/{plaintext}
- * 		Adds the secret with given plaintext to the database
- */
-
 @CrossOrigin
 @RestController
 public class HashController {

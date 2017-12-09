@@ -1,11 +1,9 @@
 package edu.usm.cos375.resthash.exception;
 
-/*
- * An exception to represent an error cracking a hash value with LMCracker
- */
-
 public class HashCrackException extends Exception {
-
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 3486226379901694080L;
 	private String message;
 	

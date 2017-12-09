@@ -3,11 +3,8 @@ import {Component} from "@angular/core";
 import {Secret} from "../model/secret.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SecretRepository} from "../model/secret.repository";
+import {RestResponse} from "../model/rest-response.model";
 import {ApiError} from "../model/api-error.model";
-
-/*
-Component to be used for generated LM Hashes
- */
 
 @Component({
   selector: "hash-gen",

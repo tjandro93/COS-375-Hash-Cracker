@@ -10,11 +10,6 @@ import {catchError} from "rxjs/operators";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/of";
 
-/*
-Service to make Http calls to the REST application
- */
-
-
 const PROTOCOL = "http";
 const PORT = 8080;
 

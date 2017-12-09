@@ -26,11 +26,9 @@ target/
 .recommenders/
 */bin/*
 
-*.zip
-hash-rest/crack-resources/ophcrack-3.7.0-bin/*
-hash-rest/crack-resources/tables_xp_free_fast/*
-hash-rest/crack-resources/tempFiles/*
+hash-rest/src/ophcrack-3.7.0-bin/*
 
 gs-rest*
 
-!**/.keep
+*.old*
+hash-rest/src/ophcrack-3.7.0-bin.zip
