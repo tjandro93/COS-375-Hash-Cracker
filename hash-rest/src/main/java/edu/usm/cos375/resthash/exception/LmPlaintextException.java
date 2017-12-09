@@ -1,9 +1,11 @@
 package edu.usm.cos375.resthash.exception;
 
+/*
+ * An Exception to represent an error based on the constraints of a valid plaintext to be hashed by the LM Algorithm
+ */
+
 public class LmPlaintextException extends Exception {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2640389570262328197L;
 	private String message;
 	

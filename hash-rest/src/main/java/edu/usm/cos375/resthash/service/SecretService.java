@@ -6,6 +6,10 @@ import edu.usm.cos375.resthash.exception.HashCrackException;
 import edu.usm.cos375.resthash.exception.LmPlaintextException;
 import edu.usm.cos375.resthash.model.Secret;
 
+/*
+ * Service interface for use in HashController as an intermediary between the application logic and the data persistence
+ */
+
 public interface SecretService {
 	
 	public List<Secret> getAll();

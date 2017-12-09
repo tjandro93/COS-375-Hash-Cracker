@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import edu.usm.cos375.resthash.model.ApiError;
 
 /*
+ * An Exception handler to return JSON representing an ApiError in response to an invalid REST call
+ * 
  * This exception handling was done following along with
  * 		https://www.toptal.com/java/spring-boot-rest-api-error-handling
  * 		http://www.baeldung.com/exception-handling-for-rest-with-spring

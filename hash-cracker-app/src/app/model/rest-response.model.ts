@@ -1,6 +1,10 @@
 import {ApiError} from "./api-error.model";
 import {Secret} from "./secret.model";
 
+/*
+Model to wrap either ApiError, Secret, or Secret[] into one class
+ */
+
 export class RestResponse {
 
   constructor(public response?: Secret | Secret[] | ApiError | any) {

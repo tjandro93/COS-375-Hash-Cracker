@@ -16,29 +16,38 @@ import edu.usm.cos375.resthash.exception.HashCrackException;
  * A Service to invoke Ophcracker to crack an LM Hash
  * Using this service requires the following resources (-) and directories (+) exist within /src
  * 
- * 	+src
+ * 	+crack-resources
  * 		+ophcrack-3.7.0-bin
  * 			+x64
- * 				+tables_xp_free_fast
- * 					- //The relevant rainbow tables
- * 				+tempFiles
- * 					-in.txt
- * 					-out.txt
- * 				- ophcrack_nogui.exe
+ * 				-ophcrack_nogui.exe
+ * 				-ophcrack.exe
+ * 			+x86	
+ * 				-ophcrack_nogui.exe
+ * 				-ophcrack.exe
+ * 		+tables_xp_free_fast
+ * 			- //The relevant rainbow tables
+ * 		+tempFiles
+ * 			-in.txt
+ * 			-out.txt
+ * 				
  * 			
+ * You can download the ophcrack-3.7.0-bin as a .zip from this website
+ * 		http://ophcrack.sourceforge.net/download.php?type=ophcrack
+ * You can download the rainbow tables - tables_xp_free_fast from this website
+ * 		http://ophcrack.sourceforge.net/tables.php
  */
 
 @Service
 public class LMCracker {
 
-	private static final String OPHCRACK_PATH = "src/ophcrack-3.7.0-bin/x64";
-	private static final String TABLE_PATH = "tables_xp_free_fast";
-	private static final String OUTPUT_PATH = "tempFiles/out.txt";
-	private static final String INPUT_PATH = "tempFiles/in.txt";
+	private static final String OPHCRACK_PATH = "crack-resources/ophcrack-3.7.0-bin/x64";
+	private static final String TABLE_PATH = "../../tables_xp_free_fast";
+	private static final String OUTPUT_PATH = "../../tempFiles/out.txt";
+	private static final String INPUT_PATH = "../../tempFiles/in.txt";
 	
 	
-	private static final String FILE_OUTPUT_PATH = "src/ophcrack-3.7.0-bin/x64/tempFiles/out.txt";
-	private static final String FILE_INPUT_PATH = "src/ophcrack-3.7.0-bin/x64/tempFiles/in.txt";
+	private static final String FILE_OUTPUT_PATH = "crack-resources/tempFiles/out.txt";
+	private static final String FILE_INPUT_PATH = "crack-resources/tempFiles/in.txt";
 	
 	private static final String[] PROCESS_CALL = {"cmd", "/c", "ophcrack_nogui", "-g", "-d", TABLE_PATH, "-t", TABLE_PATH, 
 													"-f", INPUT_PATH, "-o", OUTPUT_PATH, ">", "log.txt"};

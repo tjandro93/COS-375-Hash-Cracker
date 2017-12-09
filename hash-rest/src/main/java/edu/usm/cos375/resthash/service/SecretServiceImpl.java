@@ -13,6 +13,10 @@ import edu.usm.cos375.resthash.exception.LmPlaintextException;
 import edu.usm.cos375.resthash.model.LmHash;
 import edu.usm.cos375.resthash.model.Secret;
 
+/*
+ * Implementation of SecretService
+ */
+
 @Service
 public class SecretServiceImpl implements SecretService {
 
@@ -22,9 +26,13 @@ public class SecretServiceImpl implements SecretService {
 	@Autowired
 	private LMGenerator lmGenerator;
 	
-	@Autowired LMCracker lmCracker;
+	@Autowired 
+	private LMCracker lmCracker;
 
 
+	/*
+	 * Returns all Secrets already in the database
+	 */
 	@Override
 	public List<Secret> getAll() {
 
@@ -38,6 +46,11 @@ public class SecretServiceImpl implements SecretService {
 		return (List<Secret>) secrets;
 	}
 
+	/*
+	 * Returns a Secret whose hash matches the supplied htext
+	 * First checks the database for that Secret
+	 * If Secret is not found there it will use the LMCracker service to crack the password
+	 */
 	@Override
 	public Secret getByHash(String htext) throws HashCrackException {
 		Secret secret = secretRepository.findByHashedPlaintext(htext);
@@ -64,6 +77,10 @@ public class SecretServiceImpl implements SecretService {
 		return secret;
 	}
 
+	/*
+	 * Return a Secret whose plaintext matches the supplied ptext
+	 * If the Secret does not already exist in the database it is created
+	 */
 	@Override
 	public Secret getByPlaintext(String ptext) throws LmPlaintextException {
 		Secret s = secretRepository.findByPlaintext(ptext);
@@ -77,12 +94,19 @@ public class SecretServiceImpl implements SecretService {
 		}
 	}
 
+	/*
+	 * Remove the Secret with the given plaintext ptext from the database
+	 */
 	@Transactional
 	@Override
 	public void delete(String ptext) {
 		secretRepository.deleteByPlaintext(ptext);
 	}
 
+	/*
+	 * Creates the Secret with the given ptext and adds it to the database
+	 * Returns the Secret created
+	 */
 	@Transactional
 	@Override
 	public Secret create(String ptext) throws LmPlaintextException {
@@ -101,6 +125,10 @@ public class SecretServiceImpl implements SecretService {
 		return secretRepository.save(sec);
 	}
 
+	/*
+	 * Returns true if a Secret exists in the database with the plaintext supplied by ptext,
+	 * false otherwise
+	 */
 	@Override
 	public boolean exists(String ptext) {
 		return secretRepository.existsByPlaintext(ptext);
