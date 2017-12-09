@@ -38,6 +38,11 @@ public class RestHashExceptionHandler extends ResponseEntityExceptionHandler{
 		return buildResponseEntity(new ApiError(e.getHttpStatus(), "Request could not be completed", e));
 	}
 	
+	@ExceptionHandler(HashCrackException.class)
+	protected ResponseEntity<Object> handleHashCrackException(HashCrackException e){
+		return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, "The provided hash could not be cracked", e));
+	}
+	
 	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
             HttpHeaders headers,

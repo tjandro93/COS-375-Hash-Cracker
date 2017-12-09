@@ -21,6 +21,8 @@ public class Metadata {
 	
 	private long instantFound;
 	
+	private long secondsToFind;
+	
 	private boolean hasBeenFound = false;
 
 	public Metadata() {
@@ -41,5 +43,13 @@ public class Metadata {
 			this.instantFound = Instant.now().getEpochSecond();
 			hasBeenFound = true;
 		}
+	}
+
+	public long getSecondsToFind() {
+		return secondsToFind;
+	}
+
+	public void setSecondsToFind(long timeToFind) {
+		this.secondsToFind = timeToFind;
 	}
 }

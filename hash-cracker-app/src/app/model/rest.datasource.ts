@@ -23,51 +23,26 @@ export class RestDataSource {
 
   getAllSecrets(): Observable<Secret[]> {
     console.log("GET /secrets");
-    return this.http.get<Secret[]>(this.secretsUrl)
-      .pipe(catchError(error => {
-        console.error(error);
-
-        return Observable.of({description: error.toString()});
-      }));
+    return this.http.get<Secret[]>(this.secretsUrl);
   }
 
   getSecretByPlaintext(plaintext: string): Observable<Secret> {
     console.log("GET /secrets/" + plaintext);
-    return this.http.get<Secret>(`${this.secretsUrl}/${plaintext}`)
-      .pipe(catchError(error => {
-        console.error(error);
-        return this.createSecret(plaintext);
-        }));
+    return this.http.get<Secret>(`${this.secretsUrl}/${plaintext}`);
   }
 
   getSecretByHash(hash: string): Observable<Secret> {
     console.log("GET /hashes/" + hash);
-    return this.http.get<Secret>(`${this.hashesUrl}/${hash}`)
-      .pipe(catchError(error => {
-        console.error(error);
-
-        return Observable.of({description: error.toString()});
-      }));
+    return this.http.get<Secret>(`${this.hashesUrl}/${hash}`);
   }
 
   deleteSecret(plaintext: string): Observable<Secret> {
     console.log("DELETE /secrets/" + plaintext);
-    return this.http.delete<Secret>(`secrets/${plaintext}`)
-      .pipe(catchError(error => {
-        console.error(error);
-
-        return Observable.of({description: error.toString()});
-      }));
+    return this.http.delete<Secret>(`secrets/${plaintext}`);
   }
 
   createSecret(plaintext: string): Observable<Secret> {
     console.log("POST /secrets/" + plaintext);
-    return this.http.post<Secret>(`secrets/${plaintext}`, null)
-      .pipe(catchError(error => {
-        console.error(error);
-        return this.getSecretByPlaintext(plaintext)
-      }));
+    return this.http.post<Secret>(`secrets/${plaintext}`, null);
   }
-
-
 }

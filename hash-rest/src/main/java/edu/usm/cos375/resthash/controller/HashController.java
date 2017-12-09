@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import edu.usm.cos375.resthash.exception.HashCrackException;
 import edu.usm.cos375.resthash.exception.LmPlaintextException;
 import edu.usm.cos375.resthash.exception.RestRequestException;
 import edu.usm.cos375.resthash.model.Secret;
+import edu.usm.cos375.resthash.service.LMCracker;
 import edu.usm.cos375.resthash.service.SecretService;
 
 @CrossOrigin
@@ -45,7 +47,7 @@ public class HashController {
 	 */
 	@RequestMapping(value="secrets/{ptext}", method=RequestMethod.GET)
 	public ResponseEntity<Secret> getSecretByPlaintext(@PathVariable("ptext") String ptext) 
-			throws RestRequestException {
+			throws RestRequestException, LmPlaintextException {
 		Secret s = secretService.getByPlaintext(ptext);
 		if( s == null) {
 			throw new RestRequestException("The secret " + ptext + " could not be found in the database", 
@@ -58,7 +60,7 @@ public class HashController {
 	 * Return a secret based on the supplied hash
 	 */
 	@RequestMapping(value="hashes/{htext}", method=RequestMethod.GET)
-	public ResponseEntity<Secret> getSecretByHash(@PathVariable("htext") String htext) throws RestRequestException {
+	public ResponseEntity<Secret> getSecretByHash(@PathVariable("htext") String htext) throws RestRequestException, HashCrackException {
 		Secret secret = secretService.getByHash(htext);
 		if(secret != null){
 			return new ResponseEntity<Secret>(secret, HttpStatus.OK);
@@ -73,7 +75,7 @@ public class HashController {
 	 * Delete a secret based on supplied plaintext
 	 */
 	@RequestMapping(value="secrets/{ptext}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteByPlaintext(@PathVariable("ptext") String ptext) throws RestRequestException{
+	public ResponseEntity<Void> deleteByPlaintext(@PathVariable("ptext") String ptext) throws RestRequestException, LmPlaintextException{
 		Secret secret = secretService.getByPlaintext(ptext);
 		if(secret == null) {
 			throw new RestRequestException("The secret " + ptext + " could not be found in the database", 

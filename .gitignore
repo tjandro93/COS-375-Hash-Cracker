@@ -26,6 +26,9 @@ target/
 .recommenders/
 */bin/*
 
+hash-rest/src/ophcrack-3.7.0-bin/*
+
 gs-rest*
 
 *.old*
+hash-rest/src/ophcrack-3.7.0-bin.zip

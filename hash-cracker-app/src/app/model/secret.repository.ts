@@ -9,7 +9,7 @@ import {Metadata} from "./metadata.model";
 @Injectable()
 export class SecretRepository{
 
-  private secret : Secret = new Secret(0, "", new LmHash(0, "", new Metadata(0,0,0,false)));
+  private secret : Secret = new Secret(0, "", new LmHash(0, "", new Metadata(0,0,0,0,false)));
   private secretArr: Secret[];
   constructor(private dataSource: RestDataSource){}
 
