@@ -48,6 +48,7 @@ export class HashCrackComponent {
             this.apiError = err.error;
             this.passwordFound = false;
             this.hasApiError = true;
+            this.working = false;
         },
         () =>
         {

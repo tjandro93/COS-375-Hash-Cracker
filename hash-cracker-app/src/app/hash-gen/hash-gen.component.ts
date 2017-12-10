@@ -50,10 +50,11 @@ export class HashGenComponent{
               this.apiError = err.error;
               this.hasApiError = true;
               this.hashFound = false;
+              this.working = false;
             }, () =>
-          {
-            this.working = false;
-          });
+           {
+              this.working = false;
+            });
 
 
   }

@@ -44,7 +44,8 @@ public class RestHashExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	@ExceptionHandler(HashCrackException.class)
 	protected ResponseEntity<Object> handleHashCrackException(HashCrackException e){
-		return buildResponseEntity(new ApiError(HttpStatus.NOT_FOUND, "The provided hash could not be cracked", e));
+		return buildResponseEntity(new ApiError(HttpStatus.NOT_FOUND, "The provided hash could not be cracked." +
+				" Charset of table: [a-z][A-Z][0-9]", e));
 	}
 	
 	@ExceptionHandler(UnsupportedEncodingException.class)

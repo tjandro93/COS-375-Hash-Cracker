@@ -34,6 +34,9 @@ public class LMGenerator {
 		if(ptext.length() > 14) {
 			throw new LmPlaintextException(ptext, "plaintext must be less than 14 characters");
 		}
+		if(!Charset.forName("US-ASCII").newEncoder().canEncode(ptext)) {
+			throw new LmPlaintextException(ptext, "plaintext must only contain printable ASCII characters");
+		}
 		ptext = ptext.toUpperCase();
 		byte[] ptextCharArray = ptext.getBytes(Charset.forName("US-ASCII"));
 		byte[] allByteArray = new byte[14];
