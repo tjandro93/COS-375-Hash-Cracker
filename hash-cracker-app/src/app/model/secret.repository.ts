@@ -5,6 +5,8 @@ import {RestResponse} from "./rest-response.model";
 import {Secret} from "./secret.model";
 import {LmHash} from "./lm-hash.model";
 import {Metadata} from "./metadata.model";
+import {Subscription} from "rxjs/Subscription";
+import {Observable} from "rxjs/Observable";
 
 /*
 Repository service to access Secrets returned by RestDatasource
@@ -13,32 +15,27 @@ Repository service to access Secrets returned by RestDatasource
 @Injectable()
 export class SecretRepository{
 
-  private secret : Secret = new Secret(0, "", new LmHash(0, "", new Metadata(0,0,0,0,false)));
+  private secret : Secret //broken here;
   private secretArr: Secret[];
   constructor(private dataSource: RestDataSource){}
 
-  getAllSecrets() : Secret[] {
-    this.dataSource.getAllSecrets().subscribe(response => this.secretArr = response);
-    return this.secretArr;
+  getAllSecrets() : Observable<Secret[]> {
+    return this.dataSource.getAllSecrets();
   }
 
-  getSecretByPlaintext(plaintext: string): Secret{
-    this.dataSource.getSecretByPlaintext(plaintext).subscribe(response => this.secret = response);
-    return this.secret;
+  getSecretByPlaintext(plaintext: string): Observable<Secret>{
+    return this.dataSource.getSecretByPlaintext(plaintext);
   }
 
-  getSecretByHash(hash: string) : Secret {
-    this.dataSource.getSecretByHash(hash).subscribe(response => this.secret = response);
-    return this.secret;
+  getSecretByHash(hash: string) : Observable<Secret> {
+    return this.dataSource.getSecretByHash(hash);
   }
 
-  deleteSecret(plaintext: string) : Secret{
-    this.dataSource.deleteSecret(plaintext).subscribe(response => this.secret = response);
-    return this.secret;
+  deleteSecret(plaintext: string) : Observable<Secret>{
+    return this.dataSource.deleteSecret(plaintext);
   }
 
-  createSecret(plaintext: string) : Secret {
-    this.dataSource.createSecret(plaintext).subscribe(response => this.secret = response);
-    return this.secret;
+  createSecret(plaintext: string) : Observable<Secret> {
+    return this.dataSource.createSecret(plaintext);
   }
 }

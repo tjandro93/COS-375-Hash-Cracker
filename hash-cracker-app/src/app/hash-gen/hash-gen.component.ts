@@ -17,9 +17,7 @@ Component to be used for generated LM Hashes
 export class HashGenComponent{
   hashFound: boolean = false;
   hasApiError: boolean = false;
-  secret: Secret = new Secret();
-  secrets : Secret [] = [];
-  error: ApiError = new ApiError();
+  secret: Secret;
   genForm: FormGroup;
   plaintextAlert: string = "Password must be less than 14 characters and contain only printable ASCII characters";
 
@@ -34,7 +32,8 @@ export class HashGenComponent{
   }
 
   submitForm(form){
-    this.secret = this.repository.getSecretByPlaintext(form.plaintext);
+    this.hashFound = false;
+    this.repository.getSecretByPlaintext(form.plaintext).subscribe(res => this.secret = res);
     this.hashFound = true;
   }
 }

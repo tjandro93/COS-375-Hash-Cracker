@@ -33,7 +33,7 @@ export class HashCrackComponent {
   }
 
   submitForm(form){
-    this.secret = this.repository.getSecretByHash(form.hashtext);
+    this.repository.getSecretByHash(form.hashtext).subscribe(res => this.secret = res);
     this.passwordFound = true;
   }
 }
