@@ -7,14 +7,17 @@
     <div class="text-danger" *ngIf="!crackForm.controls['hashtext'].valid && crackForm.controls['hashtext'].touched">
       {{hashValueAlert}}
     </div>
-    <button type="submit" class="py-1 btn btn-primary" [disabled]="!crackForm.valid">
-      Find Password
+    <button type="submit" class="my-2 btn btn-primary" [disabled]="!crackForm.valid || working">
+      {{ working ? buttonTextWorking : buttonTextReady }}
     </button>
   </div>
 
   <div *ngIf="hasApiError">
     <div class="text-danger py-1">
-      Error: {{error.message}}
+      Error: {{apiError?.status}}
+    </div>
+    <div class="text-danger py-1">
+      Reason: {{apiError?.message}}
     </div>
   </div>
 

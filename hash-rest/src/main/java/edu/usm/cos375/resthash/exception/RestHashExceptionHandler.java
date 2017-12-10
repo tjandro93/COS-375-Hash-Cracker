@@ -42,7 +42,7 @@ public class RestHashExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	@ExceptionHandler(HashCrackException.class)
 	protected ResponseEntity<Object> handleHashCrackException(HashCrackException e){
-		return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, "The provided hash could not be cracked", e));
+		return buildResponseEntity(new ApiError(HttpStatus.NOT_FOUND, "The provided hash could not be cracked", e));
 	}
 	
 	@Override

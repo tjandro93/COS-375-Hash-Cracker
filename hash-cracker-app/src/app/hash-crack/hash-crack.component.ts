@@ -14,12 +14,15 @@ Component to be used to crack a hash and display the associated password
   styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
 })
 export class HashCrackComponent {
+  working: boolean = false;
   passwordFound : boolean = false;
   hasApiError: boolean = false;
   secret: Secret = new Secret();
-  error: ApiError = new ApiError();
+  apiError: ApiError = new ApiError();
   crackForm: FormGroup;
   hashValueAlert: string = "LM Hashes can only be 32 digit hexadecimal numbers";
+  buttonTextWorking: string = "Cracking Hash";
+  buttonTextReady: string = "Crack Hash"
 
   constructor(private repository: SecretRepository, private formBuilder: FormBuilder){
     this.crackForm = formBuilder.group({
@@ -33,7 +36,18 @@ export class HashCrackComponent {
   }
 
   submitForm(form){
-    this.repository.getSecretByHash(form.hashtext).subscribe(res => this.secret = res);
-    this.passwordFound = true;
+    this.working = true;
+    this.repository.getSecretByHash(form.hashtext).subscribe(res => {
+      this.secret = res
+      this.passwordFound = true;
+      this.hasApiError = false;
+    }, err => {
+      this.apiError = err.error;
+      this.passwordFound = false;
+      this.hasApiError = true;
+    }, () =>
+      {
+        this.working = false;
+      });
   }
 }

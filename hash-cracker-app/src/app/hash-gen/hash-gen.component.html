@@ -7,14 +7,17 @@
     <div class="text-danger" *ngIf="!genForm.controls['plaintext'].valid && genForm.controls['plaintext'].touched">
       {{plaintextAlert}}
     </div>
-    <button type="submit" class="py-1 btn btn-primary" [disabled]="!genForm.valid">
-      Find Hash
+    <button type="submit" class="my-2 btn btn-primary" [disabled]="!genForm.valid || working">
+      {{ working ? buttonTextWorking : buttonTextReady }}
     </button>
   </div>
 
   <div *ngIf="hasApiError">
     <div class="text-danger py-1">
-      Error: {{error.message}}
+      Error: {{apiError?.status}}
+    </div>
+    <div class="text-danger py-1">
+      Reason: {{apiError?.message}}
     </div>
   </div>
 
