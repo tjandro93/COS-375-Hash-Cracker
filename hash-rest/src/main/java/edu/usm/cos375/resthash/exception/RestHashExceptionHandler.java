@@ -1,5 +1,7 @@
 package edu.usm.cos375.resthash.exception;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +45,11 @@ public class RestHashExceptionHandler extends ResponseEntityExceptionHandler{
 	@ExceptionHandler(HashCrackException.class)
 	protected ResponseEntity<Object> handleHashCrackException(HashCrackException e){
 		return buildResponseEntity(new ApiError(HttpStatus.NOT_FOUND, "The provided hash could not be cracked", e));
+	}
+	
+	@ExceptionHandler(UnsupportedEncodingException.class)
+	protected ResponseEntity<Object> handleUnsupportedEncodingException(UnsupportedEncodingException e){
+		return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, "UnsupportedEncodingException thrown", e));
 	}
 	
 	@Override

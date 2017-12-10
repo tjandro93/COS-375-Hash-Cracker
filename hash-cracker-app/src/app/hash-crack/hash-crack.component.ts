@@ -37,17 +37,21 @@ export class HashCrackComponent {
 
   submitForm(form){
     this.working = true;
-    this.repository.getSecretByHash(form.hashtext).subscribe(res => {
-      this.secret = res
-      this.passwordFound = true;
-      this.hasApiError = false;
-    }, err => {
-      this.apiError = err.error;
-      this.passwordFound = false;
-      this.hasApiError = true;
-    }, () =>
-      {
-        this.working = false;
-      });
+    this.repository.getSecretByHash(form.hashtext)
+      .subscribe(
+        res => {
+            this.secret = res
+            this.passwordFound = true;
+            this.hasApiError = false;
+        },
+        err => {
+            this.apiError = err.error;
+            this.passwordFound = false;
+            this.hasApiError = true;
+        },
+        () =>
+        {
+            this.working = false;
+        });
   }
 }

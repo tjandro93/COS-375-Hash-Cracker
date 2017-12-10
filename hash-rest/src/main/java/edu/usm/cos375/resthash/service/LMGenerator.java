@@ -39,7 +39,7 @@ public class LMGenerator {
 		byte[] allByteArray = new byte[14];
 		int i = 0;
 		while (i < ptext.length()) {
-			if(ptextCharArray[i] < 32 || ptextCharArray[i] > 126) {
+			if(!isPrintableASCII(ptextCharArray[i])) {
 				throw new LmPlaintextException(ptext, "plaintext must only contain printable ASCII characters");
 			}
 			allByteArray[i] = ptextCharArray[i];
@@ -118,5 +118,9 @@ public class LMGenerator {
 		key[7] = (byte) ((password[6]) << 1);
 
 		return key;
+	}
+	
+	private boolean isPrintableASCII(int c) {
+		return (c >= 32 && c <=126);
 	}
 }

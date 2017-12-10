@@ -1,5 +1,7 @@
 package edu.usm.cos375.resthash.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -61,10 +63,11 @@ public class HashController {
 	 */
 	@RequestMapping(value="secrets/{ptext}", method=RequestMethod.GET)
 	public ResponseEntity<Secret> getSecretByPlaintext(@PathVariable("ptext") String ptext) 
-			throws RestRequestException, LmPlaintextException {
-		Secret s = secretService.getByPlaintext(ptext);
+			throws RestRequestException, LmPlaintextException, UnsupportedEncodingException {
+		String ptextDecoded = URLDecoder.decode(ptext, "UTF-8");
+		Secret s = secretService.getByPlaintext(ptextDecoded);
 		if( s == null) {
-			throw new RestRequestException("The secret " + ptext + " could not be found in the database", 
+			throw new RestRequestException("The secret " + ptextDecoded + " could not be found in the database", 
 					HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Secret>(s, HttpStatus.OK);
@@ -74,13 +77,14 @@ public class HashController {
 	 * Return a secret based on the supplied hash
 	 */
 	@RequestMapping(value="hashes/{htext}", method=RequestMethod.GET)
-	public ResponseEntity<Secret> getSecretByHash(@PathVariable("htext") String htext) throws RestRequestException, HashCrackException {
-		Secret secret = secretService.getByHash(htext);
+	public ResponseEntity<Secret> getSecretByHash(@PathVariable("htext") String htext) throws RestRequestException, HashCrackException, UnsupportedEncodingException {
+		String htextDecoded = URLDecoder.decode(htext, "UTF-8");
+		Secret secret = secretService.getByHash(htextDecoded);
 		if(secret != null){
 			return new ResponseEntity<Secret>(secret, HttpStatus.OK);
 		}
 		else{
-			throw new RestRequestException("No secret with the hash " + htext + " could be found in the database", 
+			throw new RestRequestException("No secret with the hash " + htextDecoded + " could be found in the database", 
 					HttpStatus.NOT_FOUND);
 		}
 	}
@@ -89,14 +93,15 @@ public class HashController {
 	 * Delete a secret based on supplied plaintext
 	 */
 	@RequestMapping(value="secrets/{ptext}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteByPlaintext(@PathVariable("ptext") String ptext) throws RestRequestException, LmPlaintextException{
-		Secret secret = secretService.getByPlaintext(ptext);
+	public ResponseEntity<Void> deleteByPlaintext(@PathVariable("ptext") String ptext) throws RestRequestException, LmPlaintextException, UnsupportedEncodingException{
+		String ptextDecoded = URLDecoder.decode(ptext, "UTF-8");
+		Secret secret = secretService.getByPlaintext(ptextDecoded);
 		if(secret == null) {
-			throw new RestRequestException("The secret " + ptext + " could not be found in the database", 
+			throw new RestRequestException("The secret " + ptextDecoded + " could not be found in the database", 
 					HttpStatus.NOT_FOUND);
 		}
 		else {
-			secretService.delete(ptext);
+			secretService.delete(ptextDecoded);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 	}
@@ -106,12 +111,13 @@ public class HashController {
 	 */
 	@RequestMapping(value="secrets/{ptext}", method=RequestMethod.POST)
 	public ResponseEntity<Secret> create(@PathVariable("ptext") String ptext, UriComponentsBuilder ucBuilder) 
-			throws LmPlaintextException, RestRequestException{
-		if(secretService.exists(ptext)) {
-			throw new RestRequestException("The secret " + ptext + " is already present in the database ", HttpStatus.CONFLICT);
+			throws LmPlaintextException, RestRequestException, UnsupportedEncodingException{
+		String ptextDecoded = URLDecoder.decode(ptext, "UTF-8");
+		if(secretService.exists(ptextDecoded)) {
+			throw new RestRequestException("The secret " + ptextDecoded + " is already present in the database ", HttpStatus.CONFLICT);
 		}
 		else {
-			Secret secret = secretService.create(ptext);
+			Secret secret = secretService.create(ptextDecoded);
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(ucBuilder.path("").buildAndExpand(ptext).toUri());

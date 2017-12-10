@@ -32,22 +32,26 @@ export class RestDataSource {
   }
 
   getSecretByPlaintext(plaintext: string): Observable<Secret> {
-    console.log("GET /secrets/" + plaintext);
-    return this.http.get<Secret>(`${this.secretsUrl}/${plaintext}`);
+    let ptext = encodeURIComponent(plaintext);
+    console.log("GET /secrets/" + ptext);
+    return this.http.get<Secret>(`${this.secretsUrl}/${ptext}`);
   }
 
   getSecretByHash(hash: string): Observable<Secret> {
-    console.log("GET /hashes/" + hash);
-    return this.http.get<Secret>(`${this.hashesUrl}/${hash}`);
+    let htext = encodeURIComponent(hash);
+    console.log("GET /hashes/" + htext);
+    return this.http.get<Secret>(`${this.hashesUrl}/${htext}`);
   }
 
   deleteSecret(plaintext: string): Observable<Secret> {
-    console.log("DELETE /secrets/" + plaintext);
-    return this.http.delete<Secret>(`secrets/${plaintext}`);
+    let ptext = encodeURIComponent(plaintext);
+    console.log("DELETE /secrets/" + ptext);
+    return this.http.delete<Secret>(`secrets/${ptext}`);
   }
 
   createSecret(plaintext: string): Observable<Secret> {
-    console.log("POST /secrets/" + plaintext);
-    return this.http.post<Secret>(`secrets/${plaintext}`, null);
+    let ptext = encodeURIComponent(plaintext);
+    console.log("POST /secrets/" + ptext);
+    return this.http.post<Secret>(`secrets/${ptext}`, null);
   }
 }
