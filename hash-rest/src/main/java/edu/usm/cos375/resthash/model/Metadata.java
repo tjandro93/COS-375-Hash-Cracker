@@ -1,12 +1,17 @@
 package edu.usm.cos375.resthash.model;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /*
  * Entity to represent some metadata for a specific Hash
@@ -20,9 +25,11 @@ public class Metadata {
 	@Column(name="META_ID")
 	private long id;
 	
+
+	private String instantFound;
+	
 	private int timesRequested;
 	
-	private long instantFound;
 	
 	private long secondsToFind;
 	
@@ -38,12 +45,12 @@ public class Metadata {
 	public void incrementTimesRequested() {
 		this.timesRequested++;
 	}
-	public long getInstantFound() {
+	public String getInstantFound() {
 		return instantFound;
 	}
 	public void updateInstantFound() {
 		if(!hasBeenFound) {
-			this.instantFound = Instant.now().getEpochSecond();
+			this.instantFound = formatDate();
 			hasBeenFound = true;
 		}
 	}
@@ -55,4 +62,10 @@ public class Metadata {
 	public void setSecondsToFind(long timeToFind) {
 		this.secondsToFind = timeToFind;
 	}
+	
+	private String formatDate() {
+		SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy - HH:mm:ss z");
+		return df.format(new Date());
+	}
+	
 }

@@ -1,6 +1,9 @@
 package edu.usm.cos375.resthash.model;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.springframework.http.HttpStatus;
 
@@ -15,13 +18,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class ApiError {
 	
 	private HttpStatus status;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-	private LocalDateTime timestamp;
+	private String timestamp;
 	private String message;
 	private String debugMessage;
 	
 	private ApiError(HttpStatus status){
-		this.timestamp = LocalDateTime.now();
+		this.timestamp = formatDate();
 		this.status = status;
 	}
 	
@@ -45,11 +47,11 @@ public class ApiError {
 		this.status = status;
 	}
 
-	public LocalDateTime getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(LocalDateTime timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
 
@@ -69,5 +71,9 @@ public class ApiError {
 		this.debugMessage = debugMessage;
 	}
 
+	private String formatDate() {
+		SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy - HH:mm:ss z");
+		return df.format(new Date());
+	}
 
 }
