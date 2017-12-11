@@ -33,10 +33,10 @@ Start a MySQL instance on port 3306 and create a schema named “db_hash”. Cre
 	[COS-375-Hash-Cracker/hash-rest/src/main/resources/application.properties](./hash-rest/src/main/resources/application.properties)
 
 #### Installing Ophcrack
-In order to provide actually cracking of hashes, you need to install the program Ophcrack and some rainbow tables. Ophcrack can be downloaded [here](http://ophcrack.sourceforge.net/download.php?type=ophcrack) by selecting the appropriate version for your operating system. Note that I have only tested my program using the Windows version.
+In order to provide actually cracking of hashes, you need to install the program Ophcrack and some rainbow tables. Ophcrack can be downloaded at [ophcrack.sourceforge.net/download.php?type=ophcrack](http://ophcrack.sourceforge.net/download.php?type=ophcrack) by selecting the appropriate version for your operating system. Note that I have only tested my program using the Windows version.
 
 
-The required rainbow tables can be downloaded [here](http://ophcrack.sourceforge.net/tables.php) by selecting the table labeled “XP free fast”
+The required rainbow tables can be downloaded at [ophcrack.sourceforge.net/tables.php](http://ophcrack.sourceforge.net/tables.php) by selecting the table labeled “XP free fast”
 
 
 Copy both of the .zip archives downloaded into [COS-375-Hash-Cracker/hash-rest/crack-resources](./hash-rest/crack-resources). Now unzip “ophcrack-3.7.0-bin.zip” in this directory and create a directory named “tables_xp_free_fast” and unzip “tables_xp_free_fast.zip” there. 
