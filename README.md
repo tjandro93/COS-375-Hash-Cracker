@@ -29,7 +29,7 @@ See [output](./output) for screen shots of the REST API, the MySQL tables backin
 ### How to Run
 
 #### Setting up MySQL
-Start a MySQL instance on port 3306 and create a schema named “db_hash”. Create a user for said instance with username “springuser” and password “cracker” and full priveledges for that schema. Tables will be added automatically to the schema, so this is enough configuration for Spring program to run. If you wish to change any of these values, you can find the configurations in the file at 
+Start a MySQL instance on port 3306 and create a schema named “db_hash”. Create a user for said instance with username “springuser” and password “cracker” and full priviledges for that schema. Tables will be added automatically to the schema, so this is enough configuration for Spring program to run. If you wish to change any of these values, you can find the configurations in the file at 
 	[COS-375-Hash-Cracker/hash-rest/src/main/resources/application.properties](./hash-rest/src/main/resources/application.properties)
 
 #### Installing Ophcrack
