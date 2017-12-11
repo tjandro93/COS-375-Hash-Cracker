@@ -1,0 +1,16 @@
+In order for the LMCracker.java service to work, the following conditions must
+be true.
+
+1. This directory exists
+2. This directory has child directories:
+	- ophcrack-3.7.0-bin
+	- tables_xp_free_fast
+	- tempFiles
+3. ophcrack-3.7.0-bin contains all the files provided in the .zip file 
+	downloaded from : http://ophcrack.sourceforge.net/download.php?type=ophcrack
+4. tables_xp_free_fast contains all the files provided in the .zip file 
+	downloaded from : http://ophcrack.sourceforge.net/tables.php
+	
+See "example.png" for an example of the correct directory structure. 
+Note that in the screenshot the files "log.txt", "in.txt", and "out.txt" are not
+required; they were created by the program itself. 

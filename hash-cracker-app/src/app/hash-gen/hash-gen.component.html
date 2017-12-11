@@ -24,6 +24,11 @@
   </div>
   </div>
 
+  <div *ngIf="working">
+    <div class="text-info">
+      Finding hash, this shouldn't take long.
+    </div>
+  </div>
 
   <div *ngIf="hashFound">
     <div class="text-info py-1">
