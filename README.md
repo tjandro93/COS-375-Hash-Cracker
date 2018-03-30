@@ -1,5 +1,10 @@
 # COS 375: Hash-Cracker
 ## Teddy Jandro
+### Introduction
+
+This project was created for COS 375: Web Application Development at the University of Southern Maine in the Fall semester of 2017 as a final project. The project specification was to create a web app using Angular for browser based clientside user interface and Spring Framework for a RESTful API which is used to data persistence to an SQL server. 
+
+The project I came up with was a simple web app which could be used online to crack password hashes. See **Current State** for a discussion of where I got with the project before handing it in. 
 
 See [hash-rest](./hash-rest) for the serverside Spring RESTful web service and [hash-cracker-app](./hash-cracker-app) for the clientside Angular web application.
 
